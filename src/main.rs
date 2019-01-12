@@ -4,6 +4,7 @@ use rand::Rng;
 
 fn main() {
     let secret_number = rand::thread_rng().gen_range(1, 101);
+    let mut num_tries = 0;
     println!("Guess the number");
 
     loop {
@@ -22,10 +23,16 @@ fn main() {
         println!("You guessed: {}", guess);
 
         match guess.cmp(&secret_number) {
-            Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too big!"),
+            Ordering::Less => {
+                println!("Too small!");
+                num_tries += 1;
+            },
+            Ordering::Greater => {
+                println!("Too big!");
+                num_tries += 1;
+            },
             Ordering::Equal => {
-                println!("You win!");
+                println!("You win! It took you {} tries", num_tries.to_string());
                 break;
             }
         }
