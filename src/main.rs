@@ -4,7 +4,7 @@ use rand::Rng;
 
 fn main() {
     let secret_number = rand::thread_rng().gen_range(1, 101);
-    let mut num_tries = 0;
+    let mut num_tries = 1;
     println!("Guess the number");
 
     loop {
@@ -32,7 +32,12 @@ fn main() {
                 num_tries += 1;
             },
             Ordering::Equal => {
-                println!("You win! It took you {} tries", num_tries.to_string());
+                if num_tries > 1 {
+                    println!("You win! It took you {} tries", num_tries.to_string());
+                } else {
+                    println!("You win! It only took you 1 attempt, Great job!");
+                }
+
                 break;
             }
         }
